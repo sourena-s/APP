@@ -44,6 +44,7 @@ Some unreviewed entries are fragments or contain likely gene-model artefacts. Co
 | `fig4_abeta_logo.png` | Aβ1–42 sequence logo, vertebrate APP |
 | `fig5_conservation_map.png` | Full-length orthologue map, species ordered by divergence |
 | `zoomB_CCP.png`, `zoomF_GYENPTY.png` | 43-residue zooms on contiguous invariant runs |
+| `zoomAbeta.png` | Abeta1-42 (APP770 672-713) across the 17 orthologues |
 | `fig7_overview_with_zooms.png` | Composite of the map and both zooms |
 
 ## Reproduce

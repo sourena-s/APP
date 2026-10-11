@@ -51,3 +51,6 @@ zoom(728, 756:762, "GYENPTY (756-762)", "AICD: MQ and GYENPTY, invariant from wo
      hl_lab = "large black Y757 = phosphorylated tyrosine (Y682 in APP695)")
 zoom(148, 186:188, "CCP (186-188)", "CuBD: invariant C158, C174, F179, G181 and the C186-C187-P188 run", "zoomB_CCP.png",
      "Copper-binding domain (CuBD, 124-189)")
+zoom(671, c(672, 713), "Abeta1-42 (APP770 672-713)", "Abeta region: conservation of human Abeta1-42 across APP orthologues",
+     "zoomAbeta.png", "Abeta1-42 with start of the transmembrane domain (700-723)",
+     hl_lab = "Abeta1 = APP770 D672; Abeta42 = A713")
