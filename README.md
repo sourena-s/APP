@@ -97,31 +97,3 @@ All 26 reviewed human integrin subunits (18 α, 8 β) were scanned for NPxY afte
 **Integrins without NPxY:** ITGB2 (it has NPLF/NPKF instead), ITGB4, ITGB8 and all α subunits.
 
 These motifs are compared with APP's NPTY (N759) in `figures/fig9_integrin_NPxY_ref_APP.png`.
-
-## When did LRP1B arise from LRP1? (`lrp1b_origin/`)
-
-**Data:** the C-terminal ~500 residues of LRP1/LRP1B (the last EGF/YWTD repeats, the transmembrane helix and the tail) from 17 animals:
-- human, mouse, chicken, frog, coelacanth, zebrafish, reedfish and ghost shark;
-- sea lamprey, amphioxus and fruit fly.
-
-Human sequences come from the checksum-verified set. The other C-terminal regions were extracted from UniProt FASTA records and were not checksum-verified, since they are partial sequences.
-
-**Methods:**
-- **Alignment:** MAFFT L-INS-i.
-- **Tree:** IQ-TREE, JTTDCMut+G4 (BIC-selected), 1000 ultrafast bootstraps, rooted on fly LRP1.
-
-**Result (`figures/fig10_LRP1_LRP1B_gene_tree.png`):**
-- Jawed-vertebrate LRP1 forms one group, including the shark (bootstrap 96).
-- LRP1B forms another, also including the shark (bootstrap 97).
-- The single lamprey LRP1-like gene branches before the LRP1/LRP1B split (bootstrap 76), and amphioxus and fly each have a single gene.
-
-The duplication therefore happened after jawless and jawed vertebrates split and before the shark lineage split off. That places it roughly 600–460 Mya in early jawed vertebrates, consistent with the vertebrate whole-genome duplications.
-
-**Caveats:**
-- The shark LRP1B gene model is truncated before the transmembrane helix.
-- Lamprey placement has moderate support. Lamprey genome duplications are debated, so a lost lamprey LRP1B cannot be fully excluded.
-
-```bash
-cd lrp1b_origin && mafft --localpair --maxiterate 1000 lrp1_noLRP2.fasta > lrp1_aln2.fasta \
-  && iqtree2 -s lrp1_aln2.fasta -m JTTDCMut+G4 -B 1000 -o "Fly_LRP1|A0A0B4KFD1" --prefix t2 && Rscript lrp1b_tree.R
-```
