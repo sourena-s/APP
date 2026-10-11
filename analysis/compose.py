@@ -1,15 +1,22 @@
 from PIL import Image, ImageDraw, ImageFont
 FULL = Image.open('fig5_conservation_map.png').convert('RGB')
-W_MAP = FULL.crop((0, 0, FULL.width, 1720))
-LEG = FULL.crop((1700, 1780, 3600, 1920))
-X0, X1, YT, YB = 508, 4778, 560, 1675                                   # panel extents (px)
+W_MAP = FULL.crop((0, 0, FULL.width, FULL.height - 150))
+import numpy as np
+_a = np.array(FULL).astype(int)
+_red = (abs(_a[:,:,0]-0xB2)<6)&(abs(_a[:,:,1]-0x18)<6)&(abs(_a[:,:,2]-0x2B)<6)
+_ys, _xs = np.where(_red)
+X0, X1 = _xs.min(), _xs.max()                    # human row spans residues 1..770
+YT = _ys.min() - 15
+_col = _a[:, (X0 + X1)//2]; _nw = np.where(_col.sum(1) < 740)[0]; _nw = _nw[_nw > _ys.max()]
+YB = _nw[np.where(np.diff(_nw) > 30)[0][0]] + 5 if (np.diff(_nw) > 30).any() else _nw.max()
 px = lambda pos: X0 + (pos - 0.5) * (X1 - X0) / 770
 
 panels = [('zoomB_CCP.png', 148, 'A'), ('zoomF_GYENPTY.png', 728, 'B')]
 cols = ['#E69F00', '#D55E00']
 
 S = 0.9                                     # scale zoom panels (3900x2040 -> ~2418x1265)
-pw, ph = int(3900 * S), int(2040 * S)
+_w, _h = Image.open('zoomAbeta.png').size
+pw, ph = int(_w * S), int(_h * S)
 gx, gap_y = 150, 420
 W = 2 * pw + 3 * gx
 mapW = W - 2 * gx; ms = mapW / W_MAP.width

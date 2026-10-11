@@ -2,7 +2,7 @@
 source("fig5.R")   # builds M, hum, cls, inv, sp, long ...
 icons <- c("🧑","🐒","🐭","🐔","🐸","🐟","🐠","🐠","🐡","🦈","🐍","🐟","✴️","🐌","🦑","🪰","🪱")
 sp$ilabel <- sp$label
-icon_img <- lapply(sprintf("icons/%02d.png", 1:17), png::readPNG)
+icon_img <- lapply(sprintf("icons_sci/%02d.png", 1:17), png::readPNG)
 long$ilabel <- factor(sp$ilabel[long$row], levels = rev(sp$ilabel))
 fills <- c(`invariant in all species` = "#00A651", `conserved in 16/17` = "#9BD7A8",
            `identical to human` = "#F4A582", human = "#B2182B", different = "grey88", gap = "white", `isolated match (lamprey/invertebrates)` = "#A0A0A0")
@@ -44,7 +44,8 @@ zoom <- function(from, box, boxlab, title, file, dom_lab, highlight = integer(0)
                                xmin = min(zr) - 10.6, xmax = min(zr) - 9.4, ymin = yy - .42, ymax = yy + .42)
   }
   p <- p + theme(axis.text.y = element_text(size = 9, margin = margin(r = 4)), plot.margin = margin(5, 5, 5, 90))
-  ggsave(file, p, width = 13, height = 6.8, dpi = 300, device = ragg::agg_png)
+  pt <- tree_panel(ylim = c(0.5, nr + 2.7))
+  ggsave(file, pt + p + plot_layout(widths = c(1.3, 8.7)), width = 14.5, height = 6.8, dpi = 300, device = ragg::agg_png)
 }
 
 zoom(728, 756:762, "GYENPTY (756-762)", "AICD: MQ and GYENPTY, invariant from worm to human", "zoomF_GYENPTY.png",

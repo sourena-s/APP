@@ -64,7 +64,8 @@ mafft --localpair --maxiterate 1000 app_only.fasta > app_aln.fasta
 iqtree2 -s all_aln.fasta -m LG+G4 -B 1000 -T AUTO --prefix tree
 Rscript analysis.R                     # fig1-4 + conservation CSV
 Rscript zooms.R                        # fig5 + zoom panels (sources fig5.R)
+python3 draw_icons.py                  # organism silhouettes
 python3 compose.py                     # fig7 composite
 ```
 
-Organism icons are rendered from Noto Color Emoji (Apache 2.0).
+Organism silhouettes are drawn by `draw_icons.py`. The species tree in the alignment figures (`species_tree.R`) uses the accepted metazoan topology with approximate node ages; zebrafish appa/appb are drawn as a short paralogue fork.

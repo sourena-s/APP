@@ -1,5 +1,6 @@
 # Full-length APP orthologue map: human on top, species ordered by divergence from human
-suppressPackageStartupMessages({library(Biostrings); library(ggplot2); library(ggrepel)})
+suppressPackageStartupMessages({library(Biostrings); library(ggplot2); library(ggrepel); library(patchwork)})
+source("species_tree.R")
 aln <- readAAStringSet("app_aln.fasta"); m <- as.matrix(aln)
 acc <- sub("\\|.*", "", names(aln)); rownames(m) <- acc
 # Order + approximate divergence time from the human lineage (TimeTree-style medians, Mya)
@@ -9,7 +10,7 @@ sp <- data.frame(acc = c("P05067","Q5IS80","P12023","A0A8V0Y745","Q6DJB6","H2ZW7
   lab = c("Human APP","Chimpanzee","Mouse","Chicken","Frog (X. tropicalis)","Coelacanth",
           "Zebrafish appa","Zebrafish appb","Fugu","Ghost shark","Sea lamprey","Amphioxus",
           "Sea urchin","Sea hare (Aplysia)","Squid","Fruit fly APPL","C. elegans APL-1"),
-  mya = c(0, 6.4, 87, 319, 352, 413, 429, 429, 429, 462, 600, 684, 684, 694, 694, 694, 694))
+  mya = c(0, 6.4, 87, 319, 352, 413, 429, 429, 429, 462, 600, 684, 690, 694, 694, 694, 694))
 sp$label <- ifelse(sp$mya == 0, sp$lab, sprintf("%s  ~%g Mya", sp$lab, sp$mya))
 m <- m[sp$acc, ]
 h <- m["P05067", ]; keep <- h != "-"
@@ -56,7 +57,8 @@ p <- ggplot(long, aes(pos, label, fill = cls)) +
   theme_minimal(base_size = 10) +
   theme(panel.grid = element_blank(), legend.position = "bottom",
         plot.background = element_rect(fill = "white", colour = NA))
-ggsave("fig5_conservation_map.png", p, width = 16, height = 6.5, dpi = 300)
+pt <- tree_panel(ylim = c(0.5, nrow(M) + 7))
+ggsave("fig5_conservation_map.png", pt + p + plot_layout(widths = c(1, 9)), width = 17.5, height = 6.5, dpi = 300)
 cat("invariant:", sum(inv), " 16/17:", sum(near), "\n")
 cat(paste0(hum[near], which(near)), "\n")
 
