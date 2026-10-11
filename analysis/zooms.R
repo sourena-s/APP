@@ -42,20 +42,16 @@ zoom <- function(from, box, boxlab, title, file, dom_lab, highlight = integer(0)
     p <- p + theme(axis.text.y = element_blank(), plot.margin = margin(5, 5, 5, 5))
     ggsave(file, p, width = 11, height = 6.8, dpi = 300, device = ragg::agg_png); return(invisible())
   }
-  for (i in seq_len(nr)) {
-    yy <- nr - i + 1
-    p <- p + annotation_custom(grid::rasterGrob(icon_img[[i]], interpolate = TRUE),
-                               xmin = min(zr) - 10.6, xmax = min(zr) - 9.4, ymin = yy - .42, ymax = yy + .42)
-  }
-  p <- p + theme(axis.text.y = element_text(size = 9, margin = margin(r = 4)), plot.margin = margin(5, 5, 5, 90))
+  p <- p + theme(axis.text.y = element_text(size = 9, margin = margin(r = 4)), plot.margin = margin(5, 5, 5, 5))
   ggsave(file, p, width = 13, height = 6.8, dpi = 300, device = ragg::agg_png)
 }
 
 zoom(728, 756:762, "GYENPTY (756-762)", "AICD: MQ and GYENPTY, invariant from worm to human", "zoomF_GYENPTY.png",
      "AICD (cytoplasmic tail, continues from 724)", highlight = 757, labels = FALSE,
      hl_lab = "large black Y757 = phosphorylated tyrosine (Y682 in APP695)")
-zoom(148, 186:188, "CCP (186-188)", "CuBD: invariant C158, C174, F179, G181 and the C186-C187-P188 run", "zoomB_CCP.png",
-     "Copper-binding domain (CuBD, 124-189)")
+zoom(146, 186:188, "CCP", "CuBD: copper-coordinating H147/H151 and the invariant C186-C187-P188 run", "zoomB_CCP.png",
+     "Copper-binding domain (CuBD, 124-189)", highlight = c(147, 151),
+     hl_lab = "large black H147, H151 = Cu-coordinating;\nmutating them reduced APP-APP interaction (co-immunoprecipitation)")
 zoom(671, c(672, 713), "Abeta1-42 (APP770 672-713)", "Abeta region: conservation of human Abeta1-42 across APP orthologues",
      "zoomAbeta.png", "Abeta1-42 with start of the transmembrane domain (700-723)",
      hl_lab = "Abeta1 = APP770 D672; Abeta42 = A713",

@@ -35,18 +35,24 @@ species_tree_df <- function(nr = 17) {
   list(seg = rbind(h, v), root = root_age)
 }
 
-tree_panel <- function(ylim, nr = 17, base = 10) {
+tree_panel <- function(ylim, nr = 17, base = 10, icons = NULL) {
   st <- species_tree_df(nr)
-  ggplot(st$seg) +
+  g <- ggplot(st$seg) +
     geom_segment(aes(x = x, xend = xend, y = y, yend = yend), linewidth = .45, lineend = "square") +
     geom_segment(data = data.frame(y = seq_len(nr)), aes(x = 0, xend = 25, y = y, yend = y),
                  linewidth = .2, linetype = "dotted", colour = "grey55") +
     scale_x_continuous(breaks = c(-600, -400, -200, 0), labels = c("600", "400", "200", "0"),
-                       expand = c(0, 0), limits = c(-st$root - 15, 25)) +
+                       expand = c(0, 0), limits = c(-st$root - 15, if (is.null(icons)) 25 else 230)) +
     coord_cartesian(ylim = ylim, expand = FALSE, clip = "off") +
     labs(x = "Mya", y = NULL) +
     theme_minimal(base_size = base) +
     theme(panel.grid = element_blank(), axis.text.y = element_blank(),
           axis.title.x = element_text(size = base * .7), axis.text.x = element_text(size = base * .6),
           plot.background = element_rect(fill = "white", colour = NA))
+  if (!is.null(icons)) for (i in seq_len(nr)) {
+    im <- icons[[i]]; asp <- ncol(im) / nrow(im); hw <- min(85, 30 * asp)
+    g <- g + annotation_custom(grid::rasterGrob(im, interpolate = TRUE),
+                               xmin = 130 - hw, xmax = 130 + hw, ymin = nr - i + 1 - .4, ymax = nr - i + 1 + .4)
+  }
+  g
 }

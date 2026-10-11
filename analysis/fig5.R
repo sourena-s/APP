@@ -57,8 +57,9 @@ p <- ggplot(long, aes(pos, label, fill = cls)) +
   theme_minimal(base_size = 10) +
   theme(panel.grid = element_blank(), legend.position = "bottom",
         plot.background = element_rect(fill = "white", colour = NA))
-pt <- tree_panel(ylim = c(0.5, nrow(M) + 7))
-ggsave("fig5_conservation_map.png", pt + p + plot_layout(widths = c(1, 9)), width = 17.5, height = 6.5, dpi = 300)
+icon_img <- lapply(sprintf("icons_sci/%02d.png", 1:17), png::readPNG)
+pt <- tree_panel(ylim = c(0.5, nrow(M) + 7), icons = icon_img)
+ggsave("fig5_conservation_map.png", pt + p + plot_layout(widths = c(1.35, 8.65)), width = 17.5, height = 6.5, dpi = 300)
 cat("invariant:", sum(inv), " 16/17:", sum(near), "\n")
 cat(paste0(hum[near], which(near)), "\n")
 
