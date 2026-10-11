@@ -51,10 +51,10 @@ tm_end <- c(LRP1=4444, LRP1B=4467, LRP2=4446, LRP3=517, LRP4=1746, LRP5=1407, LR
             LRP8=847, LRP10=461, LRP11=473, LRP12=513, VLDLR=819, SORL1=2158)
 L <- do.call(rbind, lapply(names(tm_end), function(g) scan_tail(g, as.character(s[[g]]), tm_end[[g]])))
 absentL <- setdiff(names(tm_end), unique(L$gene))
-subL <- paste0("Human paralogues. +/-10-residue windows anchored on each NPxY.\nNo NPxY in tail: ", paste(absentL, collapse = ", "), ".")
-plot_npxy(L, "LRP1 1", "fig8a_LRP_NPxY_ref_LRP1-NPxY1.png",
+subL <- paste0("Human paralogues. +/-10-residue windows; two-motif receptors show only the matching motif.\nNo NPxY in tail: ", paste(absentL, collapse = ", "), ".")
+plot_npxy(subset(L, nmot == 1 | motif == 1), "LRP1 1", "fig8a_LRP_NPxY_ref_LRP1-NPxY1.png",
           "LRP-family NPxY motifs compared with LRP1 NPxY1 (N4470PTY)", subL, gene_order = names(tm_end))
-plot_npxy(L, "LRP1 2", "fig8b_LRP_NPxY_ref_LRP1-NPxY2.png",
+plot_npxy(subset(L, nmot == 1 | motif == 2), "LRP1 2", "fig8b_LRP_NPxY_ref_LRP1-NPxY2.png",
           "LRP-family NPxY motifs compared with LRP1 NPxY2 (N4504PVY)", subL, gene_order = names(tm_end))
 
 ## ---- Integrins, APP as reference ----
