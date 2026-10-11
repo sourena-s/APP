@@ -1,0 +1,209 @@
+IQ-TREE 2.0.7 built Apr  1 2024
+
+Input file name: all_aln.fasta
+Type of analysis: tree reconstruction + ultrafast bootstrap (1000 replicates)
+Random seed number: 424174
+
+REFERENCES
+----------
+
+To cite IQ-TREE please use:
+
+Bui Quang Minh, Heiko A. Schmidt, Olga Chernomor, Dominik Schrempf,
+Michael D. Woodhams, Arndt von Haeseler, and Robert Lanfear (2020)
+IQ-TREE 2: New models and efficient methods for phylogenetic inference
+in the genomic era. Mol. Biol. Evol., in press.
+https://doi.org/10.1093/molbev/msaa015
+
+Since you used ultrafast bootstrap (UFBoot) please also cite: 
+
+Diep Thi Hoang, Olga Chernomor, Arndt von Haeseler, Bui Quang Minh,
+and Le Sy Vinh (2018) UFBoot2: Improving the ultrafast bootstrap
+approximation. Mol. Biol. Evol., 35:518–522.
+https://doi.org/10.1093/molbev/msx281
+
+SEQUENCE ALIGNMENT
+------------------
+
+Input data: 29 sequences with 1227 amino-acid sites
+Number of constant sites: 281 (= 22.9014% of all sites)
+Number of invariant (constant or ambiguous constant) sites: 281 (= 22.9014% of all sites)
+Number of parsimony informative sites: 694
+Number of distinct site patterns: 1101
+
+SUBSTITUTION PROCESS
+--------------------
+
+Model of substitution: LG+G4
+
+State frequencies: (model)
+
+Model of rate heterogeneity: Gamma with 4 categories
+Gamma shape alpha: 1.0704
+
+ Category  Relative_rate  Proportion
+  1         0.1508         0.2500
+  2         0.4969         0.2500
+  3         1.0107         0.2500
+  4         2.3415         0.2500
+Relative rates are computed as MEAN of the portion of the Gamma distribution falling in the category.
+
+MAXIMUM LIKELIHOOD TREE
+-----------------------
+
+Log-likelihood of the tree: -27781.1491 (s.e. 590.1911)
+Unconstrained log-likelihood (without tree): -8483.4668
+Number of free parameters (#branches + #model parameters): 56
+Akaike information criterion (AIC) score: 55674.2982
+Corrected Akaike information criterion (AICc) score: 55679.7546
+Bayesian information criterion (BIC) score: 55960.5885
+
+Total tree length (sum of branch lengths): 18.9943
+Sum of internal branch lengths: 5.1826 (27.2852% of tree length)
+
+NOTE: Tree is UNROOTED although outgroup taxon 'P05067|APP|Homo' is drawn at root
+Numbers in parentheses are  ultrafast bootstrap support (%)
+
++--P05067|APP|Homo
+|
++**Q5IS80|APP|Pan
+|
+|     +--A0A8V0Y745|APP|Gallus
+|  +--| (99)
+|  |  |  +--Q6DJB6|APP|Xenopus
+|  |  +--| (93)
+|  |     |           +--Q6NUZ1|APP|Danio
+|  |     |        +--| (100)
+|  |     |        |  |  +--Q8UUR9|APP|Danio
+|  |     |        |  +--| (93)
+|  |     |        |     +---O93279|APP|Takifugu
+|  |     |     +--| (82)
+|  |     |     |  |       +----------------------------A0ACM8ADC4|APP|Petromyzon
+|  |     |     |  |    +--| (92)
+|  |     |     |  |    |  |         +--------------------A0A9J7KQQ6|APP-like|Branchiostoma
+|  |     |     |  |    |  |      +--| (89)
+|  |     |     |  |    |  |      |  |             +-----------------E2QDB4|APP-like|Aplysia
+|  |     |     |  |    |  |      |  |    +--------| (100)
+|  |     |     |  |    |  |      |  |    |        +--------------Q06BR2|APP-like|Doryteuthis
+|  |     |     |  |    |  |      |  +----| (95)
+|  |     |     |  |    |  |      |       |     +------------------------P14599|APPL|Drosophila
+|  |     |     |  |    |  |      |       +-----| (95)
+|  |     |     |  |    |  |      |             +-----------------------Q10651|APL-1|Caenorhabditis
+|  |     |     |  |    |  +------| (100)
+|  |     |     |  |    |         +---------------------------------A0A7M7NBE8|APP-like|Strongylocentrotus
+|  |     |     |  +----| (100)
+|  |     |     |       |                             +--P51693|APLP1|Homo
+|  |     |     |       |               +-------------| (100)
+|  |     |     |       |               |             +--Q03157|APLP1|Mus
+|  |     |     |       |            +--| (86)
+|  |     |     |       |            |  +--------B2GU74|APLP1|Xenopus
+|  |     |     |       |         +--| (96)
+|  |     |     |       |         |  +------A0A0R4IXG2|APLP1|Danio
+|  |     |     |       |  +------| (100)
+|  |     |     |       |  |      +------H3A528|APLP1|Latimeria
+|  |     |     |       +--| (85)
+|  |     |     |          |                   +--Q06481|APLP2|Homo
+|  |     |     |          |                +--| (100)
+|  |     |     |          |                |  +--Q06335|APLP2|Mus
+|  |     |     |          |             +--| (99)
+|  |     |     |          |             |  +--F1P0A7|APLP2|Gallus
+|  |     |     |          |          +--| (98)
+|  |     |     |          |          |  +--A0A8J0T2L0|APLP2|Xenopus
+|  |     |     |          |       +--| (94)
+|  |     |     |          |       |  +--H3BFL9|APLP2|Latimeria
+|  |     |     |          |    +--| (88)
+|  |     |     |          |    |  +---A2BID8|APLP2|Danio
+|  |     |     |          +----| (100)
+|  |     |     |               +---A0A4W3GYT6|APLP2|Callorhinchus
+|  |     |  +--| (78)
+|  |     |  |  +--V9KDA3|APP|Callorhinchus
+|  |     +--| (99)
+|  |        +--H2ZW72|APP|Latimeria
++--| (100)
+   +--P12023|APP|Mus
+
+Tree in newick format:
+
+(P05067|APP|Homo:0.0014014118,Q5IS80|APP|Pan:0.0000010000,((A0A8V0Y745|APP|Gallus:0.0807643017,(Q6DJB6|APP|Xenopus:0.0964212489,((((Q6NUZ1|APP|Danio:0.1594330217,(Q8UUR9|APP|Danio:0.1878506439,O93279|APP|Takifugu:0.2489637493)93:0.0569893916)100:0.1673484591,((A0ACM8ADC4|APP|Petromyzon:1.7676435466,((A0A9J7KQQ6|APP-like|Branchiostoma:1.2665327216,((E2QDB4|APP-like|Aplysia:1.0911241456,Q06BR2|APP-like|Doryteuthis:0.9533406819)100:0.5785712770,(P14599|APPL|Drosophila:1.5112373498,Q10651|APL-1|Caenorhabditis:1.4432694580)95:0.4003720544)95:0.3025243215)89:0.2146278839,A0A7M7NBE8|APP-like|Strongylocentrotus:2.0897717144)100:0.4631903110)92:0.1846321499,(((((P51693|APLP1|Homo:0.0524427365,Q03157|APLP1|Mus:0.0967021215)100:0.8658233688,B2GU74|APLP1|Xenopus:0.5941318818)86:0.1108294224,A0A0R4IXG2|APLP1|Danio:0.4528223308)96:0.1607011103,H3A528|APLP1|Latimeria:0.4318622704)100:0.4711562869,((((((Q06481|APLP2|Homo:0.0397506507,Q06335|APLP2|Mus:0.0549024366)100:0.1108751334,F1P0A7|APLP2|Gallus:0.0947104020)99:0.0343785365,A0A8J0T2L0|APLP2|Xenopus:0.1487571345)98:0.0519480732,H3BFL9|APLP2|Latimeria:0.1664820597)94:0.0359148078,A2BID8|APLP2|Danio:0.2523016817)88:0.0626879260,A0A4W3GYT6|APLP2|Callorhinchus:0.2586044597)100:0.3150929683)85:0.0867505284)100:0.3178504095)82:0.0572306883,V9KDA3|APP|Callorhinchus:0.1557356149)78:0.0429839463,H2ZW72|APP|Latimeria:0.0931308218)99:0.0329040350)93:0.0157767329)99:0.0265269362,P12023|APP|Mus:0.0215902774)100:0.0149434976);
+
+CONSENSUS TREE
+--------------
+
+Consensus tree is constructed from 1000 bootstrap trees
+Log-likelihood of consensus tree: -27781.150199
+Robinson-Foulds distance between ML tree and consensus tree: 0
+
+Branches with support >0.000000% are kept (extended consensus)
+Branch lengths are optimized by maximum likelihood on original alignment
+Numbers in parentheses are bootstrap supports (%)
+
++--P05067|APP|Homo
+|
++--Q5IS80|APP|Pan
+|
+|     +--A0A8V0Y745|APP|Gallus
+|  +--| (99)
+|  |  |  +--Q6DJB6|APP|Xenopus
+|  |  +--| (93)
+|  |     |           +--Q6NUZ1|APP|Danio
+|  |     |        +--| (100)
+|  |     |        |  |  +--Q8UUR9|APP|Danio
+|  |     |        |  +--| (93)
+|  |     |        |     +---O93279|APP|Takifugu
+|  |     |     +--| (82)
+|  |     |     |  |       +----------------------------A0ACM8ADC4|APP|Petromyzon
+|  |     |     |  |    +--| (92)
+|  |     |     |  |    |  |         +--------------------A0A9J7KQQ6|APP-like|Branchiostoma
+|  |     |     |  |    |  |      +--| (89)
+|  |     |     |  |    |  |      |  |             +-----------------E2QDB4|APP-like|Aplysia
+|  |     |     |  |    |  |      |  |    +--------| (100)
+|  |     |     |  |    |  |      |  |    |        +--------------Q06BR2|APP-like|Doryteuthis
+|  |     |     |  |    |  |      |  +----| (95)
+|  |     |     |  |    |  |      |       |     +------------------------P14599|APPL|Drosophila
+|  |     |     |  |    |  |      |       +-----| (95)
+|  |     |     |  |    |  |      |             +-----------------------Q10651|APL-1|Caenorhabditis
+|  |     |     |  |    |  +------| (100)
+|  |     |     |  |    |         +---------------------------------A0A7M7NBE8|APP-like|Strongylocentrotus
+|  |     |     |  +----| (100)
+|  |     |     |       |                             +--P51693|APLP1|Homo
+|  |     |     |       |               +-------------| (100)
+|  |     |     |       |               |             +--Q03157|APLP1|Mus
+|  |     |     |       |            +--| (86)
+|  |     |     |       |            |  +--------B2GU74|APLP1|Xenopus
+|  |     |     |       |         +--| (96)
+|  |     |     |       |         |  +------A0A0R4IXG2|APLP1|Danio
+|  |     |     |       |  +------| (100)
+|  |     |     |       |  |      +------H3A528|APLP1|Latimeria
+|  |     |     |       +--| (85)
+|  |     |     |          |                   +--Q06481|APLP2|Homo
+|  |     |     |          |                +--| (100)
+|  |     |     |          |                |  +--Q06335|APLP2|Mus
+|  |     |     |          |             +--| (99)
+|  |     |     |          |             |  +--F1P0A7|APLP2|Gallus
+|  |     |     |          |          +--| (98)
+|  |     |     |          |          |  +--A0A8J0T2L0|APLP2|Xenopus
+|  |     |     |          |       +--| (94)
+|  |     |     |          |       |  +--H3BFL9|APLP2|Latimeria
+|  |     |     |          |    +--| (88)
+|  |     |     |          |    |  +---A2BID8|APLP2|Danio
+|  |     |     |          +----| (100)
+|  |     |     |               +---A0A4W3GYT6|APLP2|Callorhinchus
+|  |     |  +--| (78)
+|  |     |  |  +--V9KDA3|APP|Callorhinchus
+|  |     +--| (99)
+|  |        +--H2ZW72|APP|Latimeria
++--| (100)
+   +--P12023|APP|Mus
+
+
+Consensus tree in newick format: 
+
+(P05067|APP|Homo:0.0014016217,Q5IS80|APP|Pan:0.0000025912,((A0A8V0Y745|APP|Gallus:0.0807779909,(Q6DJB6|APP|Xenopus:0.0964374991,((((Q6NUZ1|APP|Danio:0.1594583762,(Q8UUR9|APP|Danio:0.1878816732,O93279|APP|Takifugu:0.2490059555)93:0.0569992061)100:0.1673885989,((A0ACM8ADC4|APP|Petromyzon:1.7683469883,((A0A9J7KQQ6|APP-like|Branchiostoma:1.2668712291,((E2QDB4|APP-like|Aplysia:1.0913413049,Q06BR2|APP-like|Doryteuthis:0.9536097276)100:0.5786408040,(P14599|APPL|Drosophila:1.5115653596,Q10651|APL-1|Caenorhabditis:1.4435943581)95:0.4002746140)95:0.3024726172)89:0.2146620510,A0A7M7NBE8|APP-like|Strongylocentrotus:2.0904754702)100:0.4632712685)92:0.1845181585,(((((P51693|APLP1|Homo:0.0527280243,Q03157|APLP1|Mus:0.0965259599)100:0.8660370371,B2GU74|APLP1|Xenopus:0.5943082306)86:0.1108992503,A0A0R4IXG2|APLP1|Danio:0.4528956707)96:0.1608281609,H3A528|APLP1|Latimeria:0.4319605872)100:0.4713369725,((((((Q06481|APLP2|Homo:0.0397612427,Q06335|APLP2|Mus:0.0549143942)100:0.1109027650,F1P0A7|APLP2|Gallus:0.0947326324)99:0.0343915839,A0A8J0T2L0|APLP2|Xenopus:0.1487894517)98:0.0519682022,H3BFL9|APLP2|Latimeria:0.1665226338)94:0.0359188137,A2BID8|APLP2|Danio:0.2523649646)88:0.0627376160,A0A4W3GYT6|APLP2|Callorhinchus:0.2586562967)100:0.3151744150)85:0.0867828200)100:0.3178908575)82:0.0572353098,V9KDA3|APP|Callorhinchus:0.1557622678)78:0.0429931664,H2ZW72|APP|Latimeria:0.0931465563)99:0.0329098008)93:0.0157796776)99:0.0265312349,P12023|APP|Mus:0.0215948658)100:0.0149453964);
+
+TIME STAMP
+----------
+
+Date and time: Sun Oct 11 22:17:08 2026
+Total CPU time used: 279.224441 seconds (0h:4m:39s)
+Total wall-clock time used: 145.2988211 seconds (0h:2m:25s)
+

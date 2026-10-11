@@ -1,0 +1,55 @@
+from PIL import Image, ImageDraw, ImageFont
+FULL = Image.open('fig5_conservation_map.png').convert('RGB')
+W_MAP = FULL.crop((0, 0, FULL.width, 1720))
+LEG = FULL.crop((1700, 1780, 3600, 1920))
+X0, X1, YT, YB = 508, 4778, 560, 1675                                   # panel extents (px)
+px = lambda pos: X0 + (pos - 0.5) * (X1 - X0) / 770
+
+panels = [('zoomB_CCP.png', 148, 'A'), ('zoomF_GYENPTY.png', 728, 'B')]
+cols = ['#E69F00', '#D55E00']
+
+S = 0.9                                     # scale zoom panels (3900x2040 -> ~2418x1265)
+pw, ph = int(3900 * S), int(2040 * S)
+gx, gap_y = 150, 420
+W = 2 * pw + 3 * gx
+mapW = W - 2 * gx; ms = mapW / W_MAP.width
+mapH = int(W_MAP.height * ms)
+top = 40
+row1 = top + mapH + gap_y
+H = row1 + ph + 60
+C = Image.new('RGB', (W, H), 'white'); d = ImageDraw.Draw(C)
+C.paste(W_MAP.resize((mapW, mapH), Image.LANCZOS), (gx, top))
+M = lambda x, y: (gx + x * ms, top + y * ms)
+
+mag = Image.open('icons/mag.png').convert('RGBA')
+font = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf', 70)
+for i, (f, start, lab) in enumerate(panels):
+    r, c = 0, i
+    x = gx + c * (pw + gx); y = row1
+    a = M(px(start), YT); b = M(px(start + 43), YB)
+    col = cols[i]
+    # window on map
+    d.rectangle([a[0], a[1], b[0], b[1]], outline=col, width=7)
+    cx = (a[0] + b[0]) / 2 if lab == 'A' else b[0] - 25   # keep connector clear of axis tick labels
+    bx = x + pw / 2
+    if r == 0:
+        lane = top + mapH + 230 + i * 60
+        pts = [(cx, b[1]), (cx, lane), (bx, lane), (bx, y)]
+    else:  # route through left gutter of the panel, down past row 1
+        lane = top + mapH + 25 + i * 30
+        gxl = x - gx / 2 + (i - 3) * 0
+        pts = [(cx, b[1]), (cx, lane), (gxl, lane), (gxl, y - 130), (bx, y - 130), (bx, y)]
+    pts[-1] = (bx, y - 175)
+    d.line(pts, fill=col, width=7, joint='curve')
+    d.line([(bx, y - 65), (bx, y)], fill=col, width=7)
+    # magnifier at panel entry
+    mx, my = pts[-2] if r == 0 else pts[-2]
+    m = mag.resize((110, 110))
+    C.paste(m, (int(bx - 55), int(y - 175)), m)
+    P = Image.open(f).convert('RGB').resize((pw, ph), Image.LANCZOS)
+    C.paste(P, (int(x), int(y)))
+    d.rectangle([x, y, x + pw, y + ph], outline=col, width=8)
+    d.text((x + 20, y + 15), lab, fill=col, font=font)
+    d.text((cx + 18, b[1] + 70), lab, fill=col, font=font)
+C.save('fig7_overview_with_zooms.png', dpi=(300, 300))
+print(C.size)
