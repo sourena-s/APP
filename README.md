@@ -69,3 +69,19 @@ python3 compose.py                     # fig7 composite
 ```
 
 Organism silhouettes are hand-drawn vectors (`draw_icons_svg.py`, SVG + PNG in `icons_sci/`). The species tree in the alignment figures (`species_tree.R`) uses the accepted metazoan topology with approximate node ages; zebrafish appa/appb are drawn as a short paralogue fork.
+
+## NPxY motifs in human LRP-family receptors (`lrp_npxy/`)
+
+The cytoplasmic tails of 13 human receptors are compared with each other, not across species: LRP1, LRP1B, LRP2, LRP3, LRP4, LRP5, LRP6, LRP8, LRP10, LRP11, LRP12, VLDLR and SORL1. All sequences were checksum-verified against UniProt.
+
+**Method:** windows of ±10 residues are anchored on each NPxY that lies after the annotated transmembrane helix. Human APP N759PTY is shown as a reference row (`figures/fig8_LRP_NPxY.png`).
+
+**Receptors with NPxY:**
+- **Two motifs each:** LRP1, LRP1B and LRP2. The second, distal motif in all three is NPVY/NPIY preceded by N-F/N-x (an FxNPxY-like context).
+- **One membrane-proximal motif:** LRP4, LRP8 and VLDLR. LRP8 and VLDLR share an identical FDNPVY.
+
+**Receptors without NPxY:** LRP3, LRP5, LRP6, LRP10, LRP11, LRP12 and SORL1.
+
+```bash
+cd lrp_npxy && Rscript npxy.R
+```

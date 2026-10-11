@@ -7,7 +7,7 @@ long$ilabel <- factor(sp$ilabel[long$row], levels = rev(sp$ilabel))
 fills <- c(`invariant in all species` = "#00A651", `conserved in 16/17` = "#9BD7A8",
            `identical to human` = "#F4A582", human = "#B2182B", different = "grey88", gap = "white", `isolated match (lamprey/invertebrates)` = "#A0A0A0")
 
-zoom <- function(from, box, boxlab, title, file, dom_lab, highlight = integer(0), hl_lab = NULL, dim_from = NULL) {
+zoom <- function(from, box, boxlab, title, file, dom_lab, highlight = integer(0), hl_lab = NULL, dim_from = NULL, labels = TRUE) {
   zr <- from:(from + 42)                       # 43 residues, same width as every panel
   Z <- long[long$pos %in% zr, ]
   if (!is.null(dim_from)) Z$cls[Z$row >= dim_from & Z$cls == "identical to human"] <- "isolated match (lamprey/invertebrates)"
@@ -38,18 +38,21 @@ zoom <- function(from, box, boxlab, title, file, dom_lab, highlight = integer(0)
     theme(panel.grid = element_blank(), legend.position = "bottom",
           axis.text.x = element_text(size = 7), axis.text.y = element_text(size = 9),
           plot.background = element_rect(fill = "white", colour = NA))
+  if (!labels) {
+    p <- p + theme(axis.text.y = element_blank(), plot.margin = margin(5, 5, 5, 5))
+    ggsave(file, p, width = 11, height = 6.8, dpi = 300, device = ragg::agg_png); return(invisible())
+  }
   for (i in seq_len(nr)) {
     yy <- nr - i + 1
     p <- p + annotation_custom(grid::rasterGrob(icon_img[[i]], interpolate = TRUE),
                                xmin = min(zr) - 10.6, xmax = min(zr) - 9.4, ymin = yy - .42, ymax = yy + .42)
   }
   p <- p + theme(axis.text.y = element_text(size = 9, margin = margin(r = 4)), plot.margin = margin(5, 5, 5, 90))
-  pt <- tree_panel(ylim = c(0.5, nr + 2.7))
-  ggsave(file, pt + p + plot_layout(widths = c(1.3, 8.7)), width = 14.5, height = 6.8, dpi = 300, device = ragg::agg_png)
+  ggsave(file, p, width = 13, height = 6.8, dpi = 300, device = ragg::agg_png)
 }
 
 zoom(728, 756:762, "GYENPTY (756-762)", "AICD: MQ and GYENPTY, invariant from worm to human", "zoomF_GYENPTY.png",
-     "AICD (cytoplasmic tail, continues from 724)", highlight = 757,
+     "AICD (cytoplasmic tail, continues from 724)", highlight = 757, labels = FALSE,
      hl_lab = "large black Y757 = phosphorylated tyrosine (Y682 in APP695)")
 zoom(148, 186:188, "CCP (186-188)", "CuBD: invariant C158, C174, F179, G181 and the C186-C187-P188 run", "zoomB_CCP.png",
      "Copper-binding domain (CuBD, 124-189)")

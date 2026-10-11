@@ -15,10 +15,12 @@ panels = [('zoomB_CCP.png', 148, 'A'), ('zoomF_GYENPTY.png', 728, 'B')]
 cols = ['#E69F00', '#D55E00']
 
 S = 0.9                                     # scale zoom panels (3900x2040 -> ~2418x1265)
-_w, _h = Image.open('zoomAbeta.png').size
+_w, _h = Image.open('zoomB_CCP.png').size
 pw, ph = int(_w * S), int(_h * S)
+sizes = {f: Image.open(f).size for f, _, _ in panels}
 gx, gap_y = 150, 420
-W = 2 * pw + 3 * gx
+pw2 = int(sizes['zoomF_GYENPTY.png'][0] * S)
+W = pw + pw2 + 3 * gx
 mapW = W - 2 * gx; ms = mapW / W_MAP.width
 mapH = int(W_MAP.height * ms)
 top = 40
@@ -33,12 +35,13 @@ font = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf'
 for i, (f, start, lab) in enumerate(panels):
     r, c = 0, i
     x = gx + c * (pw + gx); y = row1
+    pwi = pw if c == 0 else pw2
     a = M(px(start), YT); b = M(px(start + 43), YB)
     col = cols[i]
     # window on map
     d.rectangle([a[0], a[1], b[0], b[1]], outline=col, width=7)
     cx = (a[0] + b[0]) / 2 if lab == 'A' else b[0] - 25   # keep connector clear of axis tick labels
-    bx = x + pw / 2
+    bx = x + pwi / 2
     if r == 0:
         lane = top + mapH + 230 + i * 60
         pts = [(cx, b[1]), (cx, lane), (bx, lane), (bx, y)]
@@ -53,10 +56,10 @@ for i, (f, start, lab) in enumerate(panels):
     mx, my = pts[-2] if r == 0 else pts[-2]
     m = mag.resize((110, 110))
     C.paste(m, (int(bx - 55), int(y - 175)), m)
-    P = Image.open(f).convert('RGB').resize((pw, ph), Image.LANCZOS)
+    P = Image.open(f).convert('RGB').resize((pwi, ph), Image.LANCZOS)
     C.paste(P, (int(x), int(y)))
-    d.rectangle([x, y, x + pw, y + ph], outline=col, width=8)
-    d.text((x + 20, y + 15), lab, fill=col, font=font)
+    d.rectangle([x, y, x + pwi, y + ph], outline=col, width=8)
+    d.text((x - 10, y - 95), lab, fill=col, font=font)
     d.text((cx + 18, b[1] + 70), lab, fill=col, font=font)
 C.save('fig7_overview_with_zooms.png', dpi=(300, 300))
 print(C.size)
