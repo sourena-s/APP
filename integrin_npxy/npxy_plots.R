@@ -9,11 +9,11 @@ scan_tail <- function(gene, seq, tm_end) {
     data.frame(gene = gene, motif = k, nmot = length(h), pos = p, dist = h[k], col = seq_len(2 * fl + 4), aa = win(seq, p)) }))
 }
 
-plot_npxy <- function(D, ref_id, file, title, subtitle) {
+plot_npxy <- function(D, ref_id, file, title, subtitle, gene_order = unique(D$gene)) {
   D$id <- paste(D$gene, D$motif)
   D$label <- with(D, sprintf("%s  NPxY%s   N%d  (TM+%d)", gene, ifelse(nmot > 1, motif, ""), pos, dist))
   D$label[D$id == ref_id] <- paste0(D$label[D$id == ref_id], "  [ref]")
-  ids <- unique(D$id[order(D$id != ref_id, D$dist)])
+  ids <- unique(D$id[order(D$id != ref_id, match(D$gene, gene_order), D$motif)])
   D$label <- factor(D$label, levels = rev(unique(D$label[match(ids, D$id)])))
   ref <- setNames(D$aa[D$id == ref_id], D$col[D$id == ref_id])
   mot <- (fl + 1):(fl + 4); expct <- c("N", "P", "-", "Y")
@@ -53,9 +53,9 @@ L <- do.call(rbind, lapply(names(tm_end), function(g) scan_tail(g, as.character(
 absentL <- setdiff(names(tm_end), unique(L$gene))
 subL <- paste0("Human paralogues. +/-10-residue windows anchored on each NPxY.\nNo NPxY in tail: ", paste(absentL, collapse = ", "), ".")
 plot_npxy(L, "LRP1 1", "fig8a_LRP_NPxY_ref_LRP1-NPxY1.png",
-          "LRP-family NPxY motifs compared with LRP1 NPxY1 (N4470PTY)", subL)
+          "LRP-family NPxY motifs compared with LRP1 NPxY1 (N4470PTY)", subL, gene_order = names(tm_end))
 plot_npxy(L, "LRP1 2", "fig8b_LRP_NPxY_ref_LRP1-NPxY2.png",
-          "LRP-family NPxY motifs compared with LRP1 NPxY2 (N4504PVY)", subL)
+          "LRP-family NPxY motifs compared with LRP1 NPxY2 (N4504PVY)", subL, gene_order = names(tm_end))
 
 ## ---- Integrins, APP as reference ----
 b <- readAAStringSet("itgb_verified.fasta")
@@ -67,5 +67,6 @@ absentI <- c(setdiff(c("ITGB1","ITGB2","ITGB3","ITGB4","ITGB5","ITGB6","ITGB7","
 plot_npxy(rbind(A, I), "APP 1", "fig9_integrin_NPxY_ref_APP.png",
           "Integrin NPxY motifs compared with APP (G-Y-E-N759PTY)",
           paste0("Human integrin subunits; +/-10-residue windows anchored on each NPxY in the cytoplasmic tail.\nNo NPxY: ",
-                 paste(absentI, collapse = ", "), " (ITGB2 has NPLF/NPKF)."))
+                 paste(absentI, collapse = ", "), " (ITGB2 has NPLF/NPKF)."),
+          gene_order = c("APP", paste0("ITGB", 1:8)))
 write.csv(unique(rbind(L, I)[, c("gene","motif","pos","dist")]), "NPxY_positions_LRP_integrin.csv", row.names = FALSE)
