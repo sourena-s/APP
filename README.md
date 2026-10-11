@@ -74,7 +74,7 @@ Organism silhouettes are hand-drawn vectors (`draw_icons_svg.py`, SVG + PNG in `
 
 The cytoplasmic tails of 13 human receptors are compared with each other, not across species: LRP1, LRP1B, LRP2, LRP3, LRP4, LRP5, LRP6, LRP8, LRP10, LRP11, LRP12, VLDLR and SORL1. All sequences were checksum-verified against UniProt.
 
-**Method:** windows of ±10 residues are anchored on each NPxY that lies after the annotated transmembrane helix. Human APP N759PTY is shown as a reference row (`figures/fig8_LRP_NPxY.png`).
+**Method:** windows of ±10 residues are anchored on each NPxY that lies after the annotated transmembrane helix. Motifs are split into membrane-proximal and distal blocks, each compared with the corresponding LRP1 motif (N4470PTY and N4504PVY) as reference (`figures/fig8_LRP_NPxY.png`).
 
 **Receptors with NPxY:**
 - **Two motifs each:** LRP1, LRP1B and LRP2. The second, distal motif in all three is NPVY/NPIY preceded by N-F/N-x (an FxNPxY-like context).
